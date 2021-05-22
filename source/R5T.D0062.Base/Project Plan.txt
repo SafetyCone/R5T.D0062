@@ -1,0 +1,4 @@
+R5T.D0062.Base - Base service definitions library for the IEnvironmentNameProvider service.
+
+Goals
+
