@@ -14,9 +14,10 @@ namespace R5T.D0062
         /// <summary>
         /// Adds the <see cref="ConstructorBasedDefaultEnvironmentNameProvider"/> implementation of <see cref="IDefaultEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
-        public static IServiceCollection AddConstructorBasedDefaultEnvironmentNameProvider(this IServiceCollection services)
+        public static IServiceCollection AddConstructorBasedDefaultEnvironmentNameProvider(this IServiceCollection services,
+            string defaultEnvironmentName)
         {
-            services.AddSingleton<IDefaultEnvironmentNameProvider, ConstructorBasedDefaultEnvironmentNameProvider>();
+            services.AddSingleton<IDefaultEnvironmentNameProvider>(new ConstructorBasedDefaultEnvironmentNameProvider(defaultEnvironmentName));
 
             return services;
         }
@@ -24,9 +25,12 @@ namespace R5T.D0062
         /// <summary>
         /// Adds the <see cref="ConstructorBasedDefaultEnvironmentNameProvider"/> implementation of <see cref="IDefaultEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
-        public static IServiceAction<IDefaultEnvironmentNameProvider> AddConstructorBasedDefaultEnvironmentNameProviderAction(this IServiceCollection services)
+        public static IServiceAction<IDefaultEnvironmentNameProvider> AddConstructorBasedDefaultEnvironmentNameProviderAction(this IServiceCollection services,
+            string defaultEnvironmentName)
         {
-            var serviceAction = ServiceAction.New<IDefaultEnvironmentNameProvider>(() => services.AddConstructorBasedDefaultEnvironmentNameProvider());
+            var serviceAction = ServiceAction.New<IDefaultEnvironmentNameProvider>(() => services.AddConstructorBasedDefaultEnvironmentNameProvider(
+                defaultEnvironmentName));
+
             return serviceAction;
         }
 
