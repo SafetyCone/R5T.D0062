@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using R5T.Dacia;
 
-using R5T.D0063;
-
 
 namespace R5T.D0062
 {
@@ -35,32 +33,21 @@ namespace R5T.D0062
         }
 
         /// <summary>
-        /// Adds the <see cref="AspNetCoreEnvironmentVariableEnvironmentNameProvider"/> implementation of <see cref="IEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="DevelopmentDefaultEnvironmentNameProvider"/> implementation of <see cref="IDefaultEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
-        public static IServiceCollection AddAspNetCoreEnvironmentVariableEnvironmentNameProvider(this IServiceCollection services,
-            IServiceAction<IDefaultEnvironmentNameProvider> defaultEnvironmentNameProviderAction,
-            IServiceAction<IEnvironmentVariableProvider> environmentVariableProviderAction)
+        public static IServiceCollection AddDevelopmentDefaultEnvironmentNameProvider(this IServiceCollection services)
         {
-            services
-                .AddSingleton<IEnvironmentNameProvider, AspNetCoreEnvironmentVariableEnvironmentNameProvider>()
-                .Run(defaultEnvironmentNameProviderAction)
-                .Run(environmentVariableProviderAction)
-                ;
+            services.AddSingleton<IDefaultEnvironmentNameProvider, DevelopmentDefaultEnvironmentNameProvider>();
 
             return services;
         }
 
         /// <summary>
-        /// Adds the <see cref="AspNetCoreEnvironmentVariableEnvironmentNameProvider"/> implementation of <see cref="IEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="DevelopmentDefaultEnvironmentNameProvider"/> implementation of <see cref="IDefaultEnvironmentNameProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
         /// </summary>
-        public static IServiceAction<IEnvironmentNameProvider> AddAspNetCoreEnvironmentVariableEnvironmentNameProviderAction(this IServiceCollection services,
-            IServiceAction<IDefaultEnvironmentNameProvider> defaultEnvironmentNameProviderAction,
-            IServiceAction<IEnvironmentVariableProvider> environmentVariableProviderAction)
+        public static IServiceAction<IDefaultEnvironmentNameProvider> AddDevelopmentDefaultEnvironmentNameProviderAction(this IServiceCollection services)
         {
-            var serviceAction = ServiceAction.New<IEnvironmentNameProvider>(() => services.AddAspNetCoreEnvironmentVariableEnvironmentNameProvider(
-                defaultEnvironmentNameProviderAction,
-                environmentVariableProviderAction));
-
+            var serviceAction = ServiceAction.New<IDefaultEnvironmentNameProvider>(() => services.AddDevelopmentDefaultEnvironmentNameProvider());
             return serviceAction;
         }
     }

@@ -5,7 +5,7 @@ using R5T.T0018;
 using R5T.D0063;
 
 
-namespace R5T.D0062
+namespace R5T.D0062.D0063
 {
     public class AspNetCoreEnvironmentVariableEnvironmentNameProvider : IEnvironmentNameProvider
     {
