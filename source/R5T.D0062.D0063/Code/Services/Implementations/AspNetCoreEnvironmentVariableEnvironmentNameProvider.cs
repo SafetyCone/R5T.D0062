@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using R5T.T0018;
 using R5T.D0063;
+using R5T.T0018;
+using R5T.T0064;
 
 
 namespace R5T.D0062.D0063
 {
-    public class AspNetCoreEnvironmentVariableEnvironmentNameProvider : IEnvironmentNameProvider
+    [ServiceImplementationMarker]
+    public class AspNetCoreEnvironmentVariableEnvironmentNameProvider : IEnvironmentNameProvider, IServiceImplementation
     {
         private IDefaultEnvironmentNameProvider DefaultEnvironmentNameProvider { get; }
         private IEnvironmentVariableProvider EnvironmentVariableProvider { get; }

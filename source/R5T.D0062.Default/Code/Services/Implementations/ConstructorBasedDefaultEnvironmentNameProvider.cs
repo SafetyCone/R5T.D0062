@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using R5T.T0064;
+
+
 namespace R5T.D0062
 {
-    public class ConstructorBasedDefaultEnvironmentNameProvider : IDefaultEnvironmentNameProvider
+    [ServiceImplementationMarker]
+    public class ConstructorBasedDefaultEnvironmentNameProvider : IDefaultEnvironmentNameProvider, IServiceImplementation
     {
         private string DefaultEnvironmentName { get; }
 
 
         public ConstructorBasedDefaultEnvironmentNameProvider(
-            string defaultEnvironmentName)
+            [NotServiceComponent] string defaultEnvironmentName)
         {
             this.DefaultEnvironmentName = defaultEnvironmentName;
         }

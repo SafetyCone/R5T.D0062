@@ -3,10 +3,13 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Configuration;
 
+using R5T.T0064;
+
 
 namespace R5T.D0062.Chamavia
 {
-    public class EnvironmentNameProvider : IEnvironmentNameProvider
+    [ServiceImplementationMarker]
+    public class EnvironmentNameProvider : IEnvironmentNameProvider, IServiceImplementation
     {
         private IConfiguration Configuration { get; }
         private IDefaultEnvironmentNameProvider DefaultEnvironmentNameProvider { get; }
